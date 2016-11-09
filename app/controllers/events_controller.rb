@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-before_action :set_event, :only => [:show, :edit]
+before_action :set_event, :only => [:show, :edit, :update]
 
 	def index
 		@events = Event.all
@@ -12,9 +12,12 @@ before_action :set_event, :only => [:show, :edit]
 
 	def create
 		@event = Event.new(event_params)
-		@event.save
-
-		redirect_to events_path
+		if @event.save
+			flash[:notice] = "event was successfully created"
+			redirect_to events_path
+		else
+			render :new
+		end
 	end
 
 	def show
@@ -24,14 +27,17 @@ before_action :set_event, :only => [:show, :edit]
 	end
 
 	def update
-		Event.find(params[:id]).update(event_params)
-
-		redirect_to event_path(params[:id])
+		if @event.update(event_params)
+			flash[:notice] = "event was successfully updated"
+			redirect_to event_path(params[:id])
+		else
+			render :edit
+		end
 	end
 
 	def destroy
 		Event.find(params[:id]).destroy
-		
+		flash[:alert] = "event was successfully deleted"
 		redirect_to events_path
 	end
 	private
