@@ -55,7 +55,7 @@ before_action :set_event, :only => [:show, :edit, :update]
 	private
 
 	def event_params
-		params.require(:event).permit(:name, :description)
+		params.require(:event).permit(:name, :description, :category_id)
 	end
 
 	def set_event
