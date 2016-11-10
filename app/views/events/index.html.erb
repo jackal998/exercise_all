@@ -1,18 +1,20 @@
 <div class="panel panel-info">
 	<!-- Default panel contents -->
-	<div class="panel-heading">Panel heading</div>
+	<div class="panel-heading">
+		Panel heading
+	</div>
 	<div class="panel-body">
 		<p>...</p>
 	</div>
-
 	<!-- Table -->
+
 	<%= form_tag bulk_update_events_path do %>
 		<ul class="list-group">
 			<% @events.each do |event| %>
 			    <li class="list-group-item">
 				    <tr>
 						<td>
-							<!-- <%= check_box_tag 'ids[]', event.id, false %> -->
+							<%= check_box_tag 'ids[]', event.id, false %>
 							<%= link_to event.name, event_path(event) %>
 						</td>
 						<td><%= link_to 'attendees', event_attendees_path(event), :class => "btn btn-default" %></td>
@@ -21,22 +23,19 @@
 						<td><%= link_to '(JSON)', event_path(event, :format => :json), :class => "btn btn-default" %></td>
 						<td><%= link_to 'Show', event_path(event), :class => "btn btn-default" %></td>
 						<td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-default" %></td>
-						<td>
-							<%= button_to 'delete', event_path(event), 
+						<td><%= link_to 'delete', event_path(event), 
 							:method => :delete, 
 							:data => { :confirm => "Are you sure?" }, 
-							:class => "btn btn-warning", 
-							:form => { :style => "display:inline-block" } %>
+							:class => "btn btn-warning" %>
 						</td>
 				    </tr>
 			    </li>
 			<% end %>
-			<li class="list-group-item">
-				<%= submit_tag "delete", :class => "btn btn-danger" %>
-				<%= submit_tag "update", :class => "btn btn-sucess" %>					
-			</li>
 		</ul>
+		<%= submit_tag "delete", :class => "btn btn-danger" %>
+		<%= submit_tag "update", :class => "btn btn-success" %>
 	<% end %>
+
 </div>
 <%= link_to 'New Event', new_event_path, :class => "btn btn-primary" %>
 <%= link_to "Atom feed", events_path(:format => :atom), :class => "btn btn-default" %>
