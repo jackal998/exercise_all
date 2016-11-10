@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 	resources :events do
 		resources :attendees, :controller => 'event_attendees'
-		recource :location, :controller => 'event_locations'
+		resource :location, :controller => 'event_locations'
 	end
 
 	root :to => "events#index"
