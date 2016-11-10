@@ -1,12 +1,12 @@
 <div class="panel panel-info">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
-  <div class="panel-body">
-    <p>...</p>
-  </div>
+	<!-- Default panel contents -->
+	<div class="panel-heading">Panel heading</div>
+	<div class="panel-body">
+	<p>...</p>
+	</div>
 
-  <!-- Table -->
-  <ul class="list-group">
+	<!-- Table -->
+	<ul class="list-group">
 	<% @events.each do |event| %>
 	    <li class="list-group-item">
 			<tr>
@@ -21,13 +21,8 @@
 			</tr>
 	    </li>
 	<% end %>  
-  </ul>
+	</ul>
 </div>
-
-
-
-
-
 
 <%= link_to 'New Event', new_event_path, :class => "btn btn-primary" %>
 <%= link_to "Atom feed", events_path(:format => :atom), :class => "btn btn-default" %>
