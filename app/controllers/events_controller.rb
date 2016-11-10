@@ -52,10 +52,20 @@ before_action :set_event, :only => [:show, :edit, :update]
 		flash[:alert] = "event was successfully deleted"
 		redirect_to events_path
 	end
+
+	def latest
+		@events = Event.order("id DESC").limit(3)
+	end
+
 	private
 
 	def event_params
-		params.require(:event).permit(:name, :description, :category_id)
+		params.require(:event).permit(
+			:name, 
+			:description, 
+			:category_id, 
+			:location_attributes => [:id, :name, :_destroy], 
+			:group_ids => [] )
 	end
 
 	def set_event
