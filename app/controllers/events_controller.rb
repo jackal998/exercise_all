@@ -58,7 +58,17 @@ before_action :set_event, :only => [:show, :edit, :update]
 	end
 
 	def bulk_update
-		byebug
+		if params[:ids]
+			events = Event.find(params[:ids])
+			if params[:commit] == "update"
+
+			elsif params[:commit] == "delete"
+				events.each{ |e| e.destroy }
+			end
+		else
+			redirect_to events_url
+		end
+		# events = ids.map{|i| Event.find_by(i)}.compact
 	end
 
 	private

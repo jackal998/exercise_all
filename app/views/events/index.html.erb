@@ -31,11 +31,12 @@
 				    </tr>
 			    </li>
 			<% end %>
+			<li class="list-group-item">
+				<%= submit_tag "delete", :class => "btn btn-danger" %>
+				<%= submit_tag "update", :class => "btn btn-success" %>
+			</li>
 		</ul>
-		<%= submit_tag "delete", :class => "btn btn-danger" %>
-		<%= submit_tag "update", :class => "btn btn-success" %>
 	<% end %>
-
 </div>
 <%= link_to 'New Event', new_event_path, :class => "btn btn-primary" %>
 <%= link_to "Atom feed", events_path(:format => :atom), :class => "btn btn-default" %>
