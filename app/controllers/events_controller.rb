@@ -57,6 +57,10 @@ before_action :set_event, :only => [:show, :edit, :update]
 		@events = Event.order("id DESC").limit(3)
 	end
 
+	def bulk_update
+		byebug
+	end
+
 	private
 
 	def event_params
