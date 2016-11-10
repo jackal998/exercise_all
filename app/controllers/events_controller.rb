@@ -3,7 +3,8 @@ class EventsController < ApplicationController
 before_action :set_event, :only => [:show, :edit, :update]
 
 	def index
-		@events = Event.page(params[:page]).per(5)
+		@events = Event.where( [ "name like ?", "%#{params[:keyword]}%" ] ) if params[:keyword]
+		@events = @events.page(params[:page]).per(5)
 
 		respond_to do |format|
 			format.html # index.html.erb
@@ -78,6 +79,7 @@ before_action :set_event, :only => [:show, :edit, :update]
 			:name, 
 			:description, 
 			:category_id, 
+			:keyword,
 			:location_attributes => [:id, :name, :_destroy], 
 			:group_ids => [] )
 	end

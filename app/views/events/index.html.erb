@@ -4,7 +4,10 @@
 		Panel heading
 	</div>
 	<div class="panel-body">
-		<p>...</p>
+		<%= form_tag events_path, :method => :get do %>
+			<%= text_field_tag "keyword" %>
+			<%= submit_tag "Search", :class => "btn btn-default" %>
+		<% end %>
 	</div>
 	<!-- Table -->
 
