@@ -1,7 +1,19 @@
 <div class="panel panel-info">
 	<!-- Default panel contents -->
 	<div class="panel-heading">
-		Panel heading
+	Welcome!
+		<div class="pull-right">
+			<% if current_user %>
+				Hi!, 
+				<%= current_user.email.split("@").first %>
+				<%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+				<%= link_to('修改密碼', edit_registration_path(:user)) %>
+			<% else %>
+				Sign in to learn more!
+				<%= link_to('註冊', new_registration_path(:user)) %> |
+				<%= link_to('登入', new_session_path(:user)) %>
+			<% end %>				
+		</div>
 	</div>
 	<div class="panel-body">
 		<%= form_tag events_path, :method => :get do %>

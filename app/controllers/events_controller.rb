@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
 
-before_action :set_event, :only => [:show, :edit, :update]
+  before_action :authenticate_user!, :except => :index
+  before_action :set_event, :only => [:show, :edit, :update]
 
-	def index
+  def index
 		
 		if params[:keyword]
 			@events = Event.where( [ "name like ?", "%#{params[:keyword]}%" ] )
@@ -18,7 +19,7 @@ before_action :set_event, :only => [:show, :edit, :update]
 			format.json { render :json => @events.to_json }
 			format.atom { @feed_title = "My event list" } # index.atom.builder
 		end
-	end
+  end
 
 	def new
 		@event = Event.new
