@@ -3,8 +3,14 @@ class EventsController < ApplicationController
 before_action :set_event, :only => [:show, :edit, :update]
 
 	def index
-		@events = Event.where( [ "name like ?", "%#{params[:keyword]}%" ] ) if params[:keyword]
-		@events = @events.page(params[:page]).per(5)
+		
+		if params[:keyword]
+			@events = Event.where( [ "name like ?", "%#{params[:keyword]}%" ] )
+		else
+			@events = Event.all
+		end
+		sort_by = (params[:order]=="name") ? "name" : "id"
+		@events = @events.order(sort_by).page(params[:page]).per(5)
 
 		respond_to do |format|
 			format.html # index.html.erb

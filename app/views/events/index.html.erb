@@ -10,15 +10,20 @@
 		<% end %>
 	</div>
 	<!-- Table -->
-
-	<%= form_tag bulk_update_events_path do %>
-		<ul class="list-group">
+	<ul class="list-group">
+		<li class="list-group-item">
+			Sort by:
+			<%= link_to 'event',events_path( :order => "name") %>
+		</li>
+		<%= form_tag bulk_update_events_path do %>
 			<% @events.each do |event| %>
 			    <li class="list-group-item">
 				    <tr>
 						<td>
 							<%= check_box_tag 'ids[]', event.id, false %>
-							<%= link_to event.name, event_path(event) %>
+							<div class="btn btn-default">
+								<%= link_to event.name, event_path(event) %>								
+							</div>
 						</td>
 						<td><%= link_to 'attendees', event_attendees_path(event), :class => "btn btn-default" %></td>
 						<td><%= link_to 'location', event_location_path(event), :class => "btn btn-default" %></td>
@@ -38,9 +43,12 @@
 				<%= submit_tag "delete", :class => "btn btn-danger" %>
 				<%= submit_tag "update", :class => "btn btn-success" %>
 			</li>
-		</ul>
-	<% end %>
+		<% end %>
+	</ul>
+	
+	<div class="panel-footer">
+		<%= link_to 'New Event', new_event_path, :class => "btn btn-primary" %>
+		<%= link_to "Atom feed", events_path(:format => :atom), :class => "btn btn-default" %>
+		<%= paginate @events %>
+	</div>
 </div>
-<%= link_to 'New Event', new_event_path, :class => "btn btn-primary" %>
-<%= link_to "Atom feed", events_path(:format => :atom), :class => "btn btn-default" %>
-<%= paginate @events %>
