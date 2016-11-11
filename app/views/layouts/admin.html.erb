@@ -9,15 +9,13 @@
   </head>
 
   <body>
+  <h1>admin</h1>
     <div class="container">
       <div class="row">
         <p style="color: green"><%= flash[:notice] %></p>
         <p style="color: red"><%= flash[:alert] %></p>
         <%= yield %>
-        <% if current_user && current_user.admin? %>
-          <%= link_to 'admin', admin_events_path %>
-        <% end %>
-
+        <%= link_to 'admin', admin_events_path %>
       </div>
     </div>
   </body>
